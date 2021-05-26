@@ -69,8 +69,12 @@ function initializeClock(id, endtime) {
     minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
     secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
 
-    if (t.total <= 0) {
-      clearInterval(timeinterval);
+    if (t.total <= 0) { //Show 0 at every time unit if reach the deadline
+      daysSpan.innerHTML = 0;
+	  hoursSpan.innerHTML = "00";
+	  minutesSpan.innerHTML = "00";
+	  secondsSpan.innerHTML = "00";
+	  clearInterval(timeinterval);
     }
   }
 
@@ -78,5 +82,5 @@ function initializeClock(id, endtime) {
   const timeinterval = setInterval(updateClock, 1000);
 }
 
-const deadline = new Date(Date.parse('May 24, 2021 17:00 UTC'));
+const deadline = new Date(Date.parse('May 26, 2021 7:12 UTC'));
 initializeClock('clockdiv', deadline);
