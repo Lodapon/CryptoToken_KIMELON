@@ -113,3 +113,57 @@ function createUser($conn, $name, $email, $username, $pwd) {
 	exit();
 }
 
+function emptyInputLogin($username, $pwd) {
+	$result;
+	if (empty($username)||empty($pwd)) {
+		$result = true;
+	} 
+	else {
+		$result = false;
+	}
+	return $result;
+}
+
+
+
+
+function loginUser($conn, $username, $pwd) {
+	$uidExists = uidExists($conn, $username);
+	$emailExists = emailExist($conn, $username);
+
+	if ($uidExists === false && $emailExists === false) {
+		header("location: ../login.php?error=noaccount");
+		exit();
+	} else if ($uidExists !== false && $emailExists === false) {
+		$pwdHashed = $uidExists["usersPwd"];
+		$checkPwd = password_verify($pwd, $pwdHashed);
+		if ($checkPwd === false) {
+			header("location: ../login.php?error=passwordincorrect");
+			exit();
+		}
+		else if ($checkPwd === true) {
+			session_start();
+			$_SESSION['userid'] = $uidExists["usersId"];
+			$_SESSION['useruid'] = $uidExists["usersUid"];
+			header("location: ../newIndex.php");
+			exit();
+		}
+	} else if ($uidExists === false && $emailExists !== false) {
+		$pwdHashed = $emailExists["usersPwd"];
+		$checkPwd = password_verify($pwd, $pwdHashed);
+		if ($checkPwd === false) {
+			header("location: ../login.php?error=passwordincorrect");
+			exit();
+		}
+		else if ($checkPwd === true) {
+			session_start();
+			$_SESSION['userid'] = $emailExists["usersId"];
+			$_SESSION['useruid'] = $emailExists["usersUid"];
+			header("location: ../newIndex.php");
+			exit();
+		}
+	}
+
+}
+
+
