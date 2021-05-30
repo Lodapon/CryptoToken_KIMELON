@@ -501,4 +501,22 @@ body {
 
 
 
+/* For SignUP */
+.signup-form {
+    background: #000;
+    padding: 0.5em 0;
+}
+.signup-form h2 {
+    background: -webkit-linear-gradient(#BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.signup-form p {
+    color: #fff;
+    font-size: 1.5rem;
+    line-height: 1.5;
+}
+
+
 
