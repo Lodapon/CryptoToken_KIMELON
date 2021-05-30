@@ -1,3 +1,7 @@
+<?php 
+	session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head profile="https://kimelon.xyz">
@@ -41,18 +45,22 @@
 	    </button>
 	    <div class="collapse navbar-collapse" id="main-navigation">
 	        <ul class="navbar-nav">
-	            <li class="nav-item">
-	                <a class="nav-link" href="index.html">HOME</a>
-	            </li>
-	            <li class="nav-item">
-	                <a class="nav-link" href="signup.php">Sign Up</a>
-	            </li>
-	            <li class="nav-item">
-	                <a class="nav-link" href="login.php">Login</a>
-	            </li>
-	            <li class="nav-item">
-	                <a class="nav-link" href="">xxx</a>
-	            </li>
+	            <li class="nav-item"><a class="nav-link" href="index.html">HOME</a></li>
+
+	            <?php 
+	            	if (isset($_SESSION["useruid"])) {
+	            		echo '<li class="nav-item"><a class="nav-link" href="">Profile</a></li>';
+	            		echo '<li class="nav-item"><a class="nav-link" href="includes/logout.inc.php">Logout</a></li>';
+	            	} else {
+	            		echo '<li class="nav-item"><a class="nav-link" href="signup.php">Sign Up</a></li>';
+			            echo '<li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>';
+			            echo '<li class="nav-item"><a class="nav-link" href="">xxx</a></li>';
+	            	}
+	            ?>
+
+	            <!-- <li class="nav-item"><a class="nav-link" href="signup.php">Sign Up</a></li>
+	            <li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
+	            <li class="nav-item"><a class="nav-link" href="">xxx</a></li> -->
 	        </ul>
 	    </div>
 	</nav>
